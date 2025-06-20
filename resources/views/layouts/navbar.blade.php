@@ -5,6 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -204,7 +205,7 @@ integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="ano
        <a href="/sections/{{ $item->id}}" class="section" style="background-color: #002222!important;color:white"  >  <li  class="li-section li-selected" style="color:white;padding:10px;background-color: #002222!important;padding-left:30px;text-align:left;margin-left:0px;" >{{ $item->nom }}
         @if(Auth::user()->est_admin==1)
 
-        <a class="btn-delete-section" href="/deleteSection/{{ $item->id}}">
+        <a class="btn-delete-section" href="/deleteSection/{{ $item->id }}">
         <!-------------delete--------------->
           <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
             <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -219,7 +220,7 @@ integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="ano
       @endif
       </li></a>
         @else
-        <a href="/sections/{{ $item->id}}" class="section" > <li style="padding:10px;text-align:left;padding-left:40px" class="li-section" > {{ $item->nom }}  
+        <a href="/sections/{{ $item->id }}" class="section" > <li style="padding:10px;text-align:left;padding-left:40px" class="li-section" > {{ $item->nom }}  
           @if(Auth::user()->est_admin==1)
           <!---------Delete--------->
           <a  class="btn-delete-section" href="/deleteSection/{{ $item->id}}">
@@ -239,12 +240,12 @@ integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="ano
         @else 
         @isset($sections)
         @foreach ($sections as $item)  
-       <a href="/sections/{{ $item->id}}" class="section " >  <li  style="padding:10px;text-align:left;padding-left:40px" class="li-section"  >{{ $item->nom }} 
+       <a href="/sections/{{ $item->id }}" class="section " >  <li  style="padding:10px;text-align:left;padding-left:40px" class="li-section"  >{{ $item->nom }} 
         @if(Auth::user()->est_admin==1)
        
         
          <!---------modify--------->
-        <button class="btn-delete-section " onclick='window.location.href="/deleteSection/{{ $item->id}}"'>
+        <button class="btn-delete-section " onclick='window.location.href="/deleteSection/{{ $item->id }}"'>
         <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
           <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
           <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>

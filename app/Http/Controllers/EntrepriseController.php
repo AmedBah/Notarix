@@ -69,12 +69,10 @@ class EntrepriseController extends Controller
             'sections'=>$sections
         ]); 
 
-    }
-
-    public function supprimerUser($user_id){
+    }    public function supprimerUser($user_id){
         $user = Auth::user();
         $entreprises = Entreprise::all();
-        $users = DB::table('users')->where('entreprise_id',$user->entreprise_id)->get();
+        $users = DB::table('users')->where('entreprise_id',$user->entreprise_id)->paginate(6);
         $entreprise = $entreprises->find($user->entreprise_id);
         $sections = DB::table('sections')->where('user_id',$user->entreprise_id)->get();
         $userToDelete = User::find($user_id);
@@ -85,12 +83,34 @@ class EntrepriseController extends Controller
             'sections'=>$sections,
             'userToDelete' =>$userToDelete
         ]); 
-    }
-
-    public function oui($user_id){
+    }    public function oui($user_id){
+        // Vérifier que l'utilisateur connecté est admin
+        if (!Auth::user()->est_admin && !Auth::user()->isAdmin()) {
+            return redirect()->back()->with('error', 'Vous n\'avez pas les permissions pour supprimer un utilisateur');
+        }
+        
         $userToDelete = User::find($user_id);
-        $userToDelete->delete();
-        return redirect()->back();
+        
+        if (!$userToDelete) {
+            return redirect()->back()->with('error', 'Utilisateur non trouvé');
+        }
+        
+        // Empêcher la suppression de son propre compte
+        if ($userToDelete->id === Auth::id()) {
+            return redirect()->back()->with('error', 'Vous ne pouvez pas supprimer votre propre compte');
+        }
+        
+        // Vérifier que l'utilisateur à supprimer appartient à la même entreprise
+        if ($userToDelete->entreprise_id !== Auth::user()->entreprise_id) {
+            return redirect()->back()->with('error', 'Vous ne pouvez pas supprimer un utilisateur d\'une autre entreprise');
+        }
+        
+        try {
+            $userToDelete->delete();
+            return redirect()->route('listeUsers')->with('success', 'Utilisateur supprimé avec succès');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Erreur lors de la suppression de l\'utilisateur');
+        }
     }
 
     public function updateEntreprise(Request $request){

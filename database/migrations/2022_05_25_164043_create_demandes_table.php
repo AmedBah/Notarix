@@ -17,11 +17,10 @@ class CreateDemandesTable extends Migration
             $table->id();
             $table->string('etat')->default('attente'); // l'etat de la demande par defaut attente ->
             $table->string('objet'); //objet de la demande 
-            $table->string('privileges'); 
-            $table->unsignedInteger('emetteur_id');
-            $table->foreign('emetteur_id')->references('id')->on('user');
+            $table->string('privileges');            $table->unsignedInteger('emetteur_id');
+            $table->foreign('emetteur_id')->references('id')->on('users');
             $table->unsignedInteger('recepteur_id');
-            $table->foreign('recepteur_id')->references('id')->on('user');
+            $table->foreign('recepteur_id')->references('id')->on('users');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps(); 
         });

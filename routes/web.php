@@ -125,4 +125,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+// Routes pour la consultation et gestion des documents
+Route::get('/view/{id}', [DocumentController::class, 'viewDocument'])->name('document.view');
+Route::post('/log-view/{id}', [DocumentController::class, 'logView'])->name('document.log-view');
+Route::post('/request-access/{id}', [DocumentController::class, 'requestAccess'])->name('document.request-access');
+Route::post('/cancel-request/{id}', [DocumentController::class, 'cancelRequest'])->name('document.cancel-request');
+Route::post('/restore/{id}', [DocumentController::class, 'restore'])->name('document.restore');
+
 require __DIR__.'/auth.php';

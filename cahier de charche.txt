@@ -1,0 +1,87 @@
+
+1
+CAHIER DES CHARGES 
+ 
+Application d’Archivage Électronique de Documents et digitalisation 
+ 
+1. Présentation du projet 
+ 
+Nom du projet : Développement d'une application d’archivage numérique  
+ 
+Objectif : Mettre en place une solution numérique sécurisée et conforme 
+aux exigences légales du métier, pour la gestion, le stockage, 
+l’archivage, le traitement des actes et la consultation des documents. 
+ 
+2. Objectifs spécifiques 
+ 
+- Centraliser tous les documents annexes en version numérique. 
+- Répondre aux exigences de conservation à long terme des documents 
+(archives authentiques). 
+- Assurer la traçabilité et l’intégrité des documents archivés. 
+- Permettre la recherche rapide d’un document via des critères précis 
+(numéro de dossier, client, date, type de dossier). 
+- Sécuriser les données sensibles (confidentialité des dossiers par mot 
+de passe. Avec possibilité de visualiser le mot de passe par 
+l’administrateur en cas d’oubli). 
+- Garantir la sécurité, la confidentialité et la traçabilité des documents. 
+- Permettre l’accès aux documents à distance (version web ou mobile) 
+-Le logiciel doit être pourvu d’une basse de donner prenant en compte le 
+nom, le prenons, la fonction, le motif, le contact et l’email de chaque 
+individue ayant un lien avec la société (Possibilité de trouver une 
+personne avec un champs de recherche) 
+-Possibilité de rédaction d’acte et de courrier avec un canevas de 
+champs préétabli et personnalisable 
+  
+ 
+3. Fonctionnalités attendues 
+ 
+- Accès sécurisé (identifiant et mot de passe) 
+ 
+- Création de comptes utilisateurs avec rôles (Admin, Utilisateur, 
+Visiteur) 
+- Connexion sécurisée avec authentification à deux facteurs et envoi 
+d’un email pour accès seulement pour les administrateurs  
+ 
+- l’administrateur doit être capable de donner des droits d’accès pour la 
+lecture, modification, suppression, téléchargement 
+ 
+- Création d’une liste de numéro téléphonique avec gestion de visibilité 
+de certains contacte gérer par l’administrateur 
+- Possibilité d’importation de donnes  
+ 
+ 
+Archivage et classement 
+ 
+- création de champs d’activités à savoir  
+Vente particulier/  
+Vente société/ 
+Droit de personnes et de Famille/ 
+Héritage et succession/ 
+Droit des affaires/ 
+Possibilité de création d’autre champs 
+ 
+- Téléversement de fichiers (PDF, doxs, jpeg ,pnj, exl, scans d'actes, 
+pièces justificatives)  
+- création de scan de tout sorte de documents 
+- Classement automatique des documents (vente, donation, 
+testament...), nom du client, numéro de dossier, date 
+- Visionnage des documents 
+ 
+- Archivage automatique. On doit avoir un bouton pour archiver 
+automatiquement chaque document. Les documents archiver doivent 
+être des copies de chaque dossier traiter avec possibilité de mise à jour 
+par une notification ou un nuage qui apparait sur le dossier.  
+ 
+Archivage manuel. On doit avoir la possibilité de faire le même travail au 
+cas où il y a un bug. 
+ 
+ 
+Moteur de recherche performant 
+ 
+- Recherche multicritères : par client, numéro de dossier, date,  
+- Filtrage dynamique avec suggestions 
+ 
+Traçabilité et historique 
+- Suivi des consultations et modifications 
+- Journal d’activité par utilisateur 
+- Possibilité de restauration pour l’administrateur en cas de suppression 
