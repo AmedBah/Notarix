@@ -71,5 +71,17 @@ class User extends Authenticatable
         return $this->belongsTo(Mission::class);
     }
 
-    
+    /**
+     * Boot function to handle events
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            if (empty($user->logo_path)) {
+                $user->logo_path = 'default/user.png';
+            }
+        });
+    }
 }

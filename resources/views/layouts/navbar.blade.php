@@ -68,7 +68,7 @@ integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="ano
   <div class="navbar navbar-expand-md navbar-dark bg-dark " style="background-color: #002222!important;" role="navigation">
     <a class="navbar-brand hover-underline-animation" href="/users">
       <img  src="{{asset(Auth::user()->logo_path)}}" style="width: 40px;border-radius:50px;">
-     {{ Auth::user()->nom; }}  <!--  Nom de l'employé  -->
+     {{ Auth::user()->nom }}  <!--  Nom de l'employé  -->
       </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

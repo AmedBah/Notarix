@@ -48,19 +48,16 @@
                      <form method="POST" action="{{ route('login') }}">
                       @csrf
                      
-                    
-      
-      
-                      <div class="form-outline mb-4">
-                        <input type="email" name="email" id="form3Example8" class="form-control form-control-lg" :value="old('email')" required autofocus />
-                        <label class="form-label" for="form3Example8">E-Mail</label>
+                                      <div class="form-outline mb-4">
+                        <input type="email" name="email" id="form3Example8_email" class="form-control form-control-lg" :value="old('email')" required autofocus />
+                        <label class="form-label" for="form3Example8_email">E-Mail</label>
                       </div>
 
 
                       <div class="form-outline mb-4">
-                        <input type="password" name="password" id="form3Example8" class="form-control form-control-lg" required autocomplete="current-password" />
-                        <label class="form-label" for="form3Example8">Mot de passe </label>
-                      </div>                 
+                        <input type="password" name="password" id="form3Example8_password" class="form-control form-control-lg" required autocomplete="current-password" />
+                        <label class="form-label" for="form3Example8_password">Mot de passe </label>
+                      </div>
                      
                       
 
