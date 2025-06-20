@@ -11,53 +11,105 @@ class ActivityLog extends Model
 
     protected $fillable = [
         'user_id',
+        'document_id',
         'action',
-        'model_type',
-        'model_id',
-        'model_name',
-        'old_values',
-        'new_values',
+        'details',
         'ip_address',
-        'user_agent'
+        'user_agent',
+        'restaurable'
     ];
 
     protected $casts = [
-        'old_values' => 'array',
-        'new_values' => 'array',
+        'details' => 'array',
+        'restaurable' => 'boolean',
         'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'updated_at' => 'datetime'
     ];
 
-    // Relations
+    // Constantes pour les actions
+    const ACTION_VIEW = 'view';
+    const ACTION_DOWNLOAD = 'download';
+    const ACTION_CREATE = 'create';
+    const ACTION_MODIFY = 'modify';
+    const ACTION_DELETE = 'delete';
+    const ACTION_RESTORE = 'restore';
+    const ACTION_ARCHIVE = 'archive';
+    const ACTION_FINALIZE = 'finalize';
+    const ACTION_GENERATE_PDF = 'generate_pdf';
+
+    /**
+     * Relation avec l'utilisateur
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Méthodes utilitaires
-    public function getModelInstance()
+    /**
+     * Relation avec le document
+     */
+    public function document()
     {
-        $modelClass = $this->model_type;
-        return $modelClass::find($this->model_id);
+        return $this->belongsTo(Document::class);
     }
 
-    // Scopes pour faciliter les requêtes
-    public function scopeForUser($query, $userId)
+    /**
+     * Scope pour les actions restaurables
+     */
+    public function scopeRestorables($query)
+    {
+        return $query->where('restaurable', true);
+    }
+
+    /**
+     * Scope pour les actions d'un utilisateur
+     */
+    public function scopeByUser($query, $userId)
     {
         return $query->where('user_id', $userId);
     }
 
-    public function scopeForModel($query, $modelType, $modelId = null)
+    /**
+     * Scope pour les actions sur un document
+     */
+    public function scopeByDocument($query, $documentId)
     {
-        $query = $query->where('model_type', $modelType);
-        if ($modelId) {
-            $query->where('model_id', $modelId);
-        }
-        return $query;
+        return $query->where('document_id', $documentId);
     }
 
-    public function scopeAction($query, $action)
+    /**
+     * Scope pour une période donnée
+     */
+    public function scopeInPeriod($query, $dateDebut, $dateFin)
     {
-        return $query->where('action', $action);
+        return $query->whereBetween('created_at', [$dateDebut, $dateFin]);
+    }
+
+    /**
+     * Accessor pour formater la date
+     */
+    public function getFormattedDateAttribute()
+    {
+        return $this->created_at->format('d/m/Y H:i:s');
+    }
+
+    /**
+     * Accessor pour obtenir le nom de l'action
+     */
+    public function getActionNameAttribute()
+    {
+        $actions = [
+            self::ACTION_VIEW => 'Consultation',
+            self::ACTION_DOWNLOAD => 'Téléchargement',
+            self::ACTION_CREATE => 'Création',
+            self::ACTION_MODIFY => 'Modification',
+            self::ACTION_DELETE => 'Suppression',
+            self::ACTION_RESTORE => 'Restauration',
+            self::ACTION_ARCHIVE => 'Archivage',
+            self::ACTION_FINALIZE => 'Finalisation',
+            self::ACTION_GENERATE_PDF => 'Génération PDF',
+        ];
+
+        return $actions[$this->action] ?? $this->action;
     }
 }

@@ -15,13 +15,13 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->string('telephone');
-            $table->string('email');
-            $table->string('logo_path');
+            $table->string('telephone')->nullable();
+            $table->string('email')->unique();
+            $table->string('logo_path')->nullable();
             $table->boolean('est_admin')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignId('entreprise_id')->constrained();
+            // Suppression de entreprise_id pour architecture mono-entreprise
             $table->rememberToken();
             $table->timestamps();
         });

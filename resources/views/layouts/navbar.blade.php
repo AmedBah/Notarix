@@ -25,10 +25,8 @@ integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="ano
 <body onload="modalOnLoad();
     @isset($userToDelete)
     deleteEmpOnLoad();
-    @endisset">
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="background-color: #002222!important;">
-      <a class="navbar-brand" class="nav-link" href="/page" style="font-size: 20px;">GED ENSIAS <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"  fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+    @endisset">    <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="background-color: #002222!important;">
+      <a class="navbar-brand" class="nav-link" href="/dashboard" style="font-size: 20px;">Notarix GED <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"  fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
         <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
       </svg></a>
    
@@ -37,18 +35,25 @@ integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="ano
       <div class="mr-auto"></div>
       <ul class="navbar-nav my-2 my-lg-0">
 <li class="nav-item active">
-        <a class="nav-link hover-underline-animation" href="/" >Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link hover-underline-animation" href="/dashboard" >Dashboard <span class="sr-only">(current)</span></a>
       </li>
         <li class="nav-item dropdown">
-          <a style="cursor: pointer;" class="nav-link dropdown-toggle" href="/compte" id="navbarDropdown" role="button" data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ $entreprise->nom}}
-
+          <a style="cursor: pointer;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-display="static" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ Auth::user()->nom }} {{ Auth::user()->prenom }}
         </a>
           <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdown">
-            <h6 class="dropdown-header">{{$entreprise->nom}}</h6>
-            <a style="cursor: pointer;" class="dropdown-item hover-underline-animation" onclick="window.location.href='/compte'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+            <h6 class="dropdown-header">{{ Auth::user()->nom }} {{ Auth::user()->prenom }}</h6>
+            <small class="dropdown-header text-muted">{{ Auth::user()->role ?? 'Utilisateur' }}</small>
+            <div class="dropdown-divider"></div>
+            <a style="cursor: pointer;" class="dropdown-item hover-underline-animation" href="/users"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            </svg> Mon Profil</a>
+            @if(Auth::user()->est_admin || (Auth::user()->role ?? 'utilisateur') === 'admin')
+            <a style="cursor: pointer;" class="dropdown-item hover-underline-animation" href="/settings"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
               <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
-            </svg> Compte</a>
+            </svg> Administration</a>
+            @endif
+            <div class="dropdown-divider"></div>
             <form method="POST" action="{{ route('logout') }}">
               @csrf
             <a style="cursor: pointer;" class="dropdown-item hover-underline-animation"  onclick="event.preventDefault();
@@ -67,9 +72,9 @@ integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="ano
   </nav>
 
   <div class="navbar navbar-expand-md navbar-dark bg-dark " style="background-color: #002222!important;" role="navigation">
-    <a class="navbar-brand hover-underline-animation" href="/users">
+    <a class="navbar-brand hover-underline-animation" href="/dashboard">
       <img  src="{{asset(Auth::user()->logo_path)}}" style="width: 40px;border-radius:50px;">
-     {{ Auth::user()->nom }}  <!--  Nom de l'employé  -->
+     {{ Auth::user()->nom }} {{ Auth::user()->prenom }}  <!--  Nom de l'utilisateur  -->
       </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -78,26 +83,16 @@ integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="ano
     
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-           <!--  Demandes  -->
+           <!--  Navigation principale pour l'architecture centralisée  -->
+          @if(Auth::user()->est_admin || (Auth::user()->role ?? 'utilisateur') === 'admin')
           <li class="nav-item active "  style="padding-left:20px;padding-right:20px">
-            <a  class="nav-link hover-underline-animation" title="Demandes" href="/demandes" >  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16">
-              <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/>
-            </svg> </a>
+            <a  class="nav-link hover-underline-animation" title="Gestion des utilisateurs" href="{{ route('listeUsers') }}" >  
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+                <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+              </svg> Utilisateurs
+            </a>
           </li>
-
-           
-            <li class="nav-item active" style="padding-right:20px">
-              <a class="nav-link hover-underline-animation" title="partager un documents" href="#" >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
-                <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
-                </svg> 
-              </a>
-            </li>
-
-             @isset($section)
-             <li class="nav-item active" style="padding-right:20px" >
-              <a class="nav-link hover-underline-animation" href="#" data-toggle="modal" title="créer un nouveau Dossier" data-target="#creerDossier">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-folder-plus" viewBox="0 0 16 16">
+          @endif
                 <path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z"/>
                 <path d="M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z"/>
               </svg> </a>

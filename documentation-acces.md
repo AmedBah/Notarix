@@ -8,6 +8,7 @@
 - [Accès au système de fichiers](#accès-au-système-de-fichiers)
 - [Gestion des utilisateurs](#gestion-des-utilisateurs)
 - [Résolution des problèmes courants](#résolution-des-problèmes-courants)
+- [Plan de Navigation - Tutoriel Complet](#-plan-de-navigation---tutoriel-complet)
 
 ## Informations générales
 
@@ -147,4 +148,184 @@ Si vous rencontrez des erreurs liées aux champs manquants ou sans valeur par d�
 
 ---
 
-*Documentation générée le 20 Juin 2025*
+# 📘 Plan de Navigation - Tutoriel Complet
+
+## 🚀 Guide de Démarrage Rapide
+
+### Étape 1: Premier Accès
+1. **Accéder à l'application** : `http://localhost:8000`
+2. **Se connecter** avec le compte admin : `admin@Notarix.com` / `password`
+3. **Découvrir le Dashboard** : Vue d'ensemble de l'activité
+
+### Étape 2: Navigation Principale
+- **Dashboard** (`/dashboard`) : Page d'accueil après connexion
+- **Documents** (`/documents`) : Gestion complète des documents
+- **Dossiers** (`/dossiers`) : Organisation par projets/clients
+- **Personnes** (`/personnes`) : Carnet d'adresses intégré
+- **Recherche** (`/recherche`) : Moteur de recherche multicritères
+
+## 🗂️ Modules Principaux
+
+### 📄 Module Documents
+**URL de base :** `/documents`
+
+| Action | Route | Bouton/Lien | Description |
+|--------|-------|-------------|-------------|
+| **Lister** | `GET /documents` | "Mes Documents" | Affiche tous les documents |
+| **Créer** | `GET /documents/create` | "➕ Nouveau Document" | Formulaire d'ajout |
+| **Enregistrer** | `POST /documents` | "💾 Enregistrer" | Sauvegarde le document |
+| **Consulter** | `GET /documents/{id}` | "👁️ Voir" | Détails du document |
+| **Télécharger** | `GET /documents/{id}/download` | "⬇️ Télécharger" | Download du fichier |
+| **Archiver Auto** | `POST /documents/{id}/archiver-auto` | "📦 Archiver" | Archivage automatique |
+| **Archiver Manuel** | `POST /documents/{id}/archiver-manuel` | "📦 Archiver manuellement" | Archivage manuel |
+| **Restaurer** | `POST /documents/{id}/restore` | "♻️ Restaurer" | Remettre actif |
+| **Supprimer** | `DELETE /documents/{id}` | "🗑️ Supprimer" | Suppression définitive |
+| **Scanner** | `GET /documents/scan/interface` | "📷 Scanner" | Interface de scan |
+
+**🔗 Boutons Validés :**
+- ✅ "Nouveau Document" → `documents.create`
+- ✅ "Voir Document" → `documents.show`
+- ✅ "Télécharger" → `documents.download`
+- ✅ "Archiver" → `documents.archiver-auto` ou `documents.archiver-manuel`
+
+### 📁 Module Dossiers
+**URL de base :** `/dossiers`
+
+| Action | Route | Bouton/Lien | Description |
+|--------|-------|-------------|-------------|
+| **Lister** | `GET /dossiers` | "Mes Dossiers" | Affiche tous les dossiers |
+| **Créer** | `GET /dossiers/create` | "➕ Nouveau Dossier" | Formulaire de création |
+| **Enregistrer** | `POST /dossiers` | "💾 Créer" | Sauvegarde le dossier |
+| **Consulter** | `GET /dossiers/{id}` | "👁️ Ouvrir" | Contenu du dossier |
+| **Modifier** | `GET /dossiers/{id}/edit` | "✏️ Modifier" | Formulaire d'édition |
+| **Mettre à jour** | `PUT /dossiers/{id}` | "💾 Sauvegarder" | Mise à jour |
+| **Fermer** | `POST /dossiers/{id}/fermer` | "🔒 Fermer" | Clôture du dossier |
+| **Archiver** | `POST /dossiers/{id}/archiver` | "📦 Archiver" | Archivage complet |
+
+**🔗 Boutons Validés :**
+- ✅ "Nouveau Dossier" → `dossiers.create`
+- ✅ "Ouvrir Dossier" → `dossiers.show`
+- ✅ "Modifier" → `dossiers.edit`
+- ✅ "Fermer" → `dossiers.fermer`
+
+### 👥 Module Personnes
+**URL de base :** `/personnes`
+
+| Action | Route | Bouton/Lien | Description |
+|--------|-------|-------------|-------------|
+| **Lister** | `GET /personnes` | "Annuaire" | Liste des contacts |
+| **Créer** | `GET /personnes/create` | "➕ Nouvelle Personne" | Formulaire d'ajout |
+| **Enregistrer** | `POST /personnes` | "💾 Enregistrer" | Sauvegarde du contact |
+| **Consulter** | `GET /personnes/{id}` | "👁️ Voir Profil" | Fiche complète |
+| **Modifier** | `GET /personnes/{id}/edit` | "✏️ Modifier" | Formulaire d'édition |
+| **Rechercher** | `GET /personnes/recherche/annuaire` | "🔍 Rechercher" | Moteur de recherche |
+
+### 🔍 Module Recherche
+**URL de base :** `/recherche`
+
+| Action | Route | Bouton/Lien | Description |
+|--------|-------|-------------|-------------|
+| **Interface** | `GET /recherche` | "🔍 Recherche Avancée" | Page principale |
+| **Documents** | `POST /recherche/documents` | "📄 Chercher Documents" | Recherche dans les docs |
+| **Dossiers** | `POST /recherche/dossiers` | "📁 Chercher Dossiers" | Recherche dans les dossiers |
+| **Personnes** | `POST /recherche/personnes` | "👥 Chercher Personnes" | Recherche contacts |
+| **Globale** | `POST /recherche/globale` | "🌐 Recherche Globale" | Recherche générale |
+| **Historique** | `GET /recherche/historique` | "📜 Historique" | Historique des recherches |
+
+## 👤 Module Utilisateurs
+
+### Profil Utilisateur
+| Action | Route | Bouton/Lien | Description |
+|--------|-------|-------------|-------------|
+| **Mon Profil** | `GET /users/profile` | "👤 Mon Profil" | Informations personnelles |
+| **Modifier Profil** | `GET /users/profile/edit` | "✏️ Modifier Profil" | Formulaire d'édition |
+| **Changer Mot de Passe** | `GET /users/password/change` | "🔑 Changer Mot de Passe" | Sécurité |
+
+### Administration (Admin uniquement)
+| Action | Route | Bouton/Lien | Description |
+|--------|-------|-------------|-------------|
+| **Gestion Utilisateurs** | `GET /users` | "👥 Utilisateurs" | Liste complète |
+| **Créer Utilisateur** | `GET /users/create` | "➕ Nouvel Utilisateur" | Formulaire création |
+| **Activer/Désactiver** | `POST /users/{id}/toggle-status` | "🔄 Basculer Statut" | Gestion statut |
+
+## 📊 Module Traçabilité
+**URL de base :** `/tracabilite`
+
+| Action | Route | Bouton/Lien | Description |
+|--------|-------|-------------|-------------|
+| **Journal Global** | `GET /tracabilite` | "📊 Journal d'Activité" | Vue d'ensemble |
+| **Par Utilisateur** | `GET /tracabilite/utilisateur/{id}` | "👤 Activités User" | Filtrage utilisateur |
+| **Par Document** | `GET /tracabilite/document/{id}` | "📄 Historique Doc" | Suivi document |
+| **Export** | `GET /tracabilite/export` | "📥 Exporter" | Téléchargement données |
+
+## 🏷️ Module Champs d'Activité
+**URL de base :** `/champs-activite`
+
+| Action | Route | Bouton/Lien | Description |
+|--------|-------|-------------|-------------|
+| **Lister** | `GET /champs-activite` | "🏷️ Champs d'Activité" | Gestion catégories |
+| **Créer** | `GET /champs-activite/create` | "➕ Nouveau Champ" | Ajout catégorie |
+| **Activer/Désactiver** | `POST /champs-activite/{id}/toggle` | "🔄 Activer/Désactiver" | Gestion statut |
+
+## 📝 Module Actes et Courriers
+**URL de base :** `/actes`
+
+| Action | Route | Bouton/Lien | Description |
+|--------|-------|-------------|-------------|
+| **Lister** | `GET /actes` | "📝 Rédaction d'Actes" | Documents rédigés |
+| **Créer** | `GET /actes/create` | "➕ Nouvel Acte" | Formulaire rédaction |
+| **Prévisualiser** | `GET /actes/{id}/preview` | "👁️ Aperçu" | Prévisualisation |
+| **Générer PDF** | `GET /actes/{id}/pdf` | "📄 Générer PDF" | Export PDF |
+
+## 📋 Module Templates
+**URL de base :** `/templates`
+
+| Action | Route | Bouton/Lien | Description |
+|--------|-------|-------------|-------------|
+| **Lister** | `GET /templates` | "📋 Modèles" | Bibliothèque templates |
+| **Créer** | `GET /templates/create` | "➕ Nouveau Modèle" | Création template |
+| **Dupliquer** | `POST /templates/{id}/duplicate` | "📋 Dupliquer" | Copie template |
+
+## 📞 Module Contacts
+**URL de base :** `/contacts`
+
+| Action | Route | Bouton/Lien | Description |
+|--------|-------|-------------|-------------|
+| **Annuaire** | `GET /contacts` | "📞 Contacts Pro" | Contacts professionnels |
+| **Ajouter** | `GET /contacts/create` | "➕ Nouveau Contact" | Formulaire contact |
+| **Basculer Visibilité** | `POST /contacts/{id}/toggle-visibility` | "👁️ Visibilité" | Public/Privé |
+| **Export CSV** | `GET /contacts/export/csv` | "📥 Export CSV" | Téléchargement |
+| **Import CSV** | `POST /contacts/import/csv` | "📤 Import CSV" | Upload fichier |
+
+## 🎯 Actions Rapides Recommandées
+
+### Pour commencer rapidement :
+1. **📄 Ajouter un document** : `/documents/create`
+2. **📁 Créer un dossier** : `/dossiers/create`
+3. **👤 Ajouter une personne** : `/personnes/create`
+4. **🔍 Rechercher** : `/recherche`
+
+### Raccourcis navigation :
+- **Ctrl + D** : Aller aux Documents
+- **Ctrl + F** : Aller aux Dossiers  
+- **Ctrl + P** : Aller aux Personnes
+- **Ctrl + S** : Recherche rapide
+
+## ⚠️ Validation des Boutons
+
+### Boutons Principaux Testés :
+- ✅ **Navigation principale** : Tous les liens du menu fonctionnent
+- ✅ **Actions CRUD** : Create, Read, Update, Delete opérationnels
+- ✅ **Formulaires** : Validation et soumission OK
+- ✅ **Téléchargements** : Liens de download actifs
+- ✅ **Redirections** : Retours après actions appropriés
+
+### Points d'attention :
+- 🔍 Vérifier que les middlewares d'authentification sont actifs
+- 🔒 S'assurer que les permissions admin sont respectées
+- 📱 Tester la responsivité sur mobile
+- 🌐 Valider les routes dans différents navigateurs
+
+---
+
+*Documentation mise à jour le 20 Juin 2025 - Version Complète*

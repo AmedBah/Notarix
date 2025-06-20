@@ -10,8 +10,7 @@ class CreateDocumentsTable extends Migration
      * Run the migrations.
      *
      * @return void
-     */
-    public function up()
+     */    public function up()
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
@@ -20,11 +19,10 @@ class CreateDocumentsTable extends Migration
             $table->float('taille');
             $table->string('type');
             $table->string('logo_path')->default('logoDoc.png');
-            $table->string('content')->nullable();
+            $table->text('content')->nullable();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('dossier_id')->constrained()->onDelete('cascade');
-            $table->foreignId('section_id')->constrained()->onDelete('cascade');
-            $table->foreignId('entreprise_id')->constrained()->onDelete('cascade');
+            // Suppression des références obsolètes section_id et entreprise_id
             $table->timestamps();
         });
     }

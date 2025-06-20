@@ -10,15 +10,16 @@ class CreateDossiersTable extends Migration
      * Run the migrations.
      *
      * @return void
-     */
-    public function up()
+     */    public function up()
     {
         Schema::create('dossiers', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
-            $table->string('chemin');
-            $table->float('taille');
-            $table->foreignId('section_id')->constrained()->onDelete('cascade');
+            $table->string('nom_dossier');
+            $table->string('chemin')->nullable();
+            $table->float('taille')->default(0);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->text('description')->nullable();
+            $table->enum('statut', ['ouvert', 'ferme', 'archive'])->default('ouvert');
             $table->timestamps();
         });
     }
